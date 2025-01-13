@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grey {
+    @apply no-underline text-[#828282] text-base leading-[1.8] mr-4;
+}
+
+
+.grey2 {
+    @apply inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem];
+}
+
+.fgKeBV {
+    @apply w-full bg-[#f8f8f8] flex justify-center;
+}
+
+.bGfHbP {
+    @apply max-w-[110rem] w-[110rem] pt-[4.8rem] pb-[2.2rem] px-0 relative;
+}
+
+.gzcbGg {
+    @apply flex items-center w-full justify-between mb-16;
+}
+
+.ceanFw {
+    @apply min-w-[10rem] w-max max-w-full cursor-pointer relative py-1 px-2.5 border border-[#b5b5b5] rounded-[0.6rem];
+}

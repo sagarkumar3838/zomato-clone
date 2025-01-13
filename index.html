@@ -1,0 +1,1454 @@
+<!doctype html>
+<html  class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="./main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <script>
+
+        const toggleDarkMode = () => {
+            document.documentElement.classList.toggle('dark');
+        };
+
+
+
+        const html = document.querySelector('html');
+        const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const isDarkOrAuto = localStorage.getItem('hs_theme') === 'dark' || (localStorage.getItem('hs_theme') === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        if (isLightOrAuto && html.classList.contains('dark')) html.classList.remove('dark');
+        else if (isDarkOrAuto && html.classList.contains('light')) html.classList.remove('light');
+        else if (isDarkOrAuto && !html.classList.contains('dark')) html.classList.add('dark');
+        else if (isLightOrAuto && !html.classList.contains('light')) html.classList.add('light');
+    </script>
+</head>
+
+<body class="overflow-x-hidden w-full  bg-white dark:bg-gray-500 text-black dark:text-white">
+
+    <!-- Header -->
+    <header class="bg-transparent shadow-md py-4  px-6 flex justify-between items-center  cursor-pointer dark:bg-gray-500 dark:text-white">
+        <div class="flex items-center">
+            <img src="images/zomato.png" alt="Zomato Logo" class="h-8">
+        </div>
+        <nav class="px-8 flex justify-between items-center gap-12 bg-transparent">
+            <a href="#" class="text-gray-700  hover:animate-spinnergrow dark:text-white">Restaurants</a>
+            <a href="#" class="text-gray-700 hover:animate-spinnergrow  dark:text-white">Profile</a>
+            <a href="#" class="text-gray-700 hover:animate-spinnergrow  dark:text-white">Investor Relation</a>
+            <a href="#" class="text-gray-700 hover:animate-spinnergrow  dark:text-white">Add restaurant</a>
+            <a href="#" class="text-gray-700 hover:animate-spinnergrow   dark:text-white">Log in</a>
+            <a href="#" class="text-gray-700 hover:animate-spinnergrow dark:text-white">Sign up</a>
+
+             <!-- dark mode  -->
+            <div class="hs-dropdown px-4">
+                <button id="hs-dropdown-dark-mode" type="button"
+                    class="hs-dropdown-toggle hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600 font-medium dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500"
+                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <svg class="hs-dark-mode-active:hidden block size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+
+                    <svg class="hs-dark-mode-active:block hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="m4.93 4.93 1.41 1.41"></path>
+                        <path d="m17.66 17.66 1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="m6.34 17.66-1.41 1.41"></path>
+                        <path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+                </button>
+
+                <div id="selectThemeDropdown"
+                    class="hs-dropdown-menu hs-dropdown-open:opacity-100 mt-2 hidden z-10 transition-[margin,opacity] opacity-0 duration-300 mb-2 origin-bottom-left bg-white shadow-md rounded-lg p-1 space-y-0.5 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700"
+                    role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-dark-mode">
+                    <button type="button"
+                        class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                        data-hs-theme-click-value="default">
+                        Default (Light)
+                    </button>
+                    <button type="button"
+                        class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                        data-hs-theme-click-value="dark">
+                        Dark
+                    </button>
+                    <button type="button"
+                        class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                        data-hs-theme-click-value="auto">
+                        Auto (System)
+                    </button>
+                </div>
+            </div>
+
+            <!-- dark mode end -->
+
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+
+    <section class="bg-cover bg-center h-[30rem] flex items-center justify-center z-0"
+        style="background-image: url('images/banner.png')">
+        <div class="text-center text-white">
+            <div class="parent h-[6rem] w-[30rem] relative max-h-0  bg-transparent text-lg ">
+                <div
+                    class="white-logo  bottom-[70px] left-[2rem] w-full h-auto relative z-0 rounded-lg transition-all duration-300 hover:scale-110">
+                    <img src="https://b.zmtcdn.com/web_assets/8313a97515fcb0447d2d77c276532a511583262271.png" alt="">
+                </div>
+            </div>
+
+            <div class="description mt-10">
+                <h1 class="text-4xl font-bold mb-4 ">Discover the best food & drinks</h1>
+            </div>
+
+
+
+            <!-- searchbox section -->
+
+            <form class="max-w-lg mx-auto ">
+                <div class="flex">
+                    <label for="search-dropdown"
+                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
+
+
+
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                        class="flex-shrink-0 z-0 hover:z-50 flex items-center py-2.5 px-6 text-sm font-medium text-center justify-between text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                        type="button">
+                        <i class="fa-solid fa-location-dot fa-fade fa-sm mr-3" style="color: #df362a;"></i>
+                        All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg></button>
+                    <div id="dropdown"
+                        class=" hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mockups</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Templates</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative w-full">
+                        <input type="search" id="search-dropdown"
+                            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-primary"
+                            placeholder="Search for restaurant , cuisine or a dish " required />
+                        <button type="submit"
+                            class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+    </section>
+
+
+
+
+    <div class="box-inherit tap-highlight-transparent">
+        <!-- section 1 -->
+
+        <section class="section_1 items-center mt-10 mb-6">
+            <div class="jpaktn  relative max-w-[100%]   left-4 ">
+
+                <div class="sc-fMvjmP hUADdv mb-6 ml-5  ">
+                    <div class="sc-bke1zw-0 fIuLDK  relative flex flex-wrap  items-center justify-center  h-[70%]  ">
+                        <div
+                            class=" card_1 sc-bke1zw-1 gJKavv relative w-[50%] flex-grow-0 flex-shrink-0 max-w-[25.3333%] pt-0 pr-[10.3333px] pb-[20px] pl-0  ">
+                            <a href="https://www.zomato.com/bangalore/order-food-online?delivery_subzone=3655"
+                                class="sc-bECiaU bYJIiR  block no-underline relative cursor-pointer transition-transform duration-300 ">
+                                <div
+                                    class="sc-s1isp7-1 grmOkY sc-dJyloi irTdKb rounded-sm overflow-hidden relative max-w-[100%] h-[24rem] shadow-lg">
+                                    <div src="" alt="Order Online"
+                                        class="sc-s1isp7-3 cVOEqG w-[100%] absolute top-0 left-0 h-[100%] bg-primary bg-no-repeat opacity-0 transition-opacity duration-[250ms] ease-out rounded-inherit">
+                                    </div>
+                                    <img alt="Order Online"
+                                        src="https://b.zmtcdn.com/webFrontend/e5b8785c257af2a7f354f1addaf37e4e1647364814.jpeg?output-format=webp&amp;fit=around|402:360&amp;crop=402:360;*,*"
+                                        loading="lazy"
+                                        class="sc-s1isp7-5 fyZwWD  object-cover opacity-100 transform-none rounded-inherit      overflow-clip-margin: content-box
+                                    overflow: clip  w-full h-auto relative z-0 rounded-lg transition-all duration-300 hover:scale-110">
+                                </div>
+                                <div
+                                    class="sc-fsPSfr wgHEu pt-[1rem] pr-[2rem] pb-[1.6rem] pl-[2rem] w-[100%] absolute bottom-0 left-0  bg-white border border-[#e8e8e8] rounded-b-[.3rem] ">
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ title  text-left font-medium text-2xl leading-[3.2rem] m-0">
+                                        Order Online</p>
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ subtitle  font-normal whitespace-nowrap overflow-hidden text-ellipsis text-inherit leading-[1.5] m-0 text-[#363636]">
+                                        Stay home and order to your doorstep</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                            class=" card_2 sc-bke1zw-1 lcfsHG  relative w-[90%] flex-grow-0 flex-shrink-0 max-w-[25.3333%] pt-0 pr-[10.3333px] pb-[20px] pl-0">
+                            <a href="https://www.zomato.com/bangalore/dine-out"
+                                class="sc-bECiaU bYJIiR block no-underline relative cursor-pointer transition-transform duration-300">
+                                <div
+                                    class="sc-s1isp7-1 grmOkY sc-dJyloi irTdKb  rounded-sm overflow-hidden relative max-w-[100%] h-[24rem] shadow-lg">
+                                    <div src="" alt="Dining"
+                                        class="sc-s1isp7-3 cVOEqG w-[100%] absolute top-0 left-0 h-[100%] bg-primary bg-no-repeat opacity-0 transition-opacity duration-[250ms] ease-out rounded-inherit">
+                                    </div>
+                                    <img alt="Dining"
+                                        src="https://b.zmtcdn.com/webFrontend/d026b357feb0d63c997549f6398da8cc1647364915.jpeg?output-format=webp&amp;fit=around|402:360&amp;crop=402:360;*,*"
+                                        loading="lazy"
+                                        class="sc-s1isp7-5 fyZwWD  object-cover opacity-100 transform-none rounded-inherit       overflow-clip-margin: content-box
+                                    overflow: clip w-full h-auto relative z-0 rounded-lg transition-all duration-300 hover:scale-110">
+                                </div>
+                                <div
+                                    class="sc-fsPSfr wgHEu pt-[1rem] pr-[2rem] pb-[1.6rem] pl-[2rem] w-[100%] absolute bottom-0 left-0  bg-white border border-[#e8e8e8] rounded-b-[.3rem]">
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ title text-left font-medium text-2xl leading-[3.2rem] m-0">
+                                        Dining</p>
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ subtitle font-normal whitespace-nowrap overflow-hidden text-ellipsis text-inherit leading-[1.5] m-0 text-[#363636]">
+                                        View the city's favourite dining venues</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                            class=" card_3 sc-bke1zw-1 fvVOZY  relative w-[90%] flex-grow-0 flex-shrink-0 max-w-[25.3333%] pt-0 pr-[10.3333px] pb-[20px] pl-0">
+                            <a href="https://www.zomato.com/live/city/bengaluru/events"
+                                class="sc-bECiaU bYJIiR block no-underline relative cursor-pointer transition-transform duration-300">
+                                <div
+                                    class="sc-s1isp7-1 grmOkY sc-dJyloi irTdKb  rounded-sm overflow-hidden relative max-w-[100%] h-[24rem] shadow-lg">
+                                    <div src="" alt="Live Events"
+                                        class="sc-s1isp7-3 cVOEqG w-[100%] absolute top-0 left-0 h-[100%] bg-primary bg-no-repeat opacity-0 transition-opacity duration-[250ms] ease-out rounded-inherit">
+                                    </div><img alt="Live Events" src="./images/live_events.png" loading="lazy"
+                                        class="sc-s1isp7-5 fyZwWD  object-cover opacity-100 transform-none rounded-inherit      overflow-clip-margin: content-box
+                                    overflow: clip  w-full h-auto relative z-0 rounded-lg transition-all duration-300 hover:scale-110">
+                                </div>
+                                <div
+                                    class="sc-fsPSfr wgHEupt pt-[1rem] pr-[2rem] pb-[1.6rem] pl-[2rem] w-[100%] absolute bottom-0 left-0  bg-white border border-[#e8e8e8] rounded-b-[.3rem]">
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ title text-left font-medium text-2xl leading-[3.2rem] m-0">
+                                        Live Events</p>
+                                    <p
+                                        class="sc-1hez2tp-0 bBZBLJ subtitle font-normal whitespace-nowrap overflow-hidden text-ellipsis text-inherit leading-[1.5] m-0 text-[#363636] ">
+                                        Discover India’s best events &amp; concerts</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Categories Section -->
+
+        <section class="my-8 px-6    ">
+            <div class="collection   ">
+                <h1 class="text-3xl font-bold mb-2 ">Collections</h1>
+                <div class="see-more-link flex justify-between mt-[0.4rem] text-xl font-semibold">
+                    <h6 class="content_1 leading-relaxed  text-gray-700">
+                        Explore curated lists of top restaurants, cafes, pubs, and bars in Bengaluru, based on trends
+                    </h6>
+                    <a href="#" class="no-underline">
+                        <span class="text-orange-700">"All collections in Bengaluru"
+                            <i class="fa-solid fa-caret-right" style="color: #e46521;"></i>
+                        </span>
+
+                    </a>
+                </div>
+            </div>
+
+
+
+
+            <section>
+                <div class="flex  flex-wrap justify-evenly items-center  px-20 pb-6 pt-[4rem]">
+
+
+                    <article
+                        class="relative isolate flex flex-col justify-center overflow-hidden rounded-2xl  max-w-sm   w-[20%] h-[26rem] hover:animate-flip px-4 pt-52">
+                        <img src="images/ccard1.png"
+                            class="absolute inset-0 h-full w-full object-cover  hover:animate-flip">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <h3 class="z-10 mt-3 text-xl font-semibold text-white overflow-hidden">Best Rooftop Place</h3>
+                        <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">51 Places
+                            <i class="fa-solid fa-caret-right fa-beat" style="color: #f7f3f3;"></i>
+                        </div>
+                    </article>
+
+                    <article
+                        class="relative isolate flex flex-col justify-center overflow-hidden rounded-2xl  max-w-sm   w-[20%] h-[26rem] hover:animate-flip px-4 pt-52">
+                        <img src="images/ccard3.png"
+                            class="absolute inset-0 h-full w-full object-cover  hover:animate-flip">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <h3 class="z-10 mt-3 text-xl font-semibold text-white overflow-hidden">Newly Opened Places</h3>
+                        <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">41 Places
+                            <i class="fa-solid fa-caret-right fa-beat" style="color: #f7f3f3;"></i>
+                        </div>
+                    </article>
+
+                    <article
+                        class="relative isolate flex flex-col justify-center overflow-hidden rounded-2xl max-w-sm   w-[20%] h-[26rem] hover:animate-flip px-4 pt-52">
+                        <img src="images/ccard4.png"
+                            class="absolute inset-0 h-full w-full object-cover  hover:animate-flip">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <h3 class="z-10 mt-3 text-xl font-semibold text-white overflow-hidden">It's a Date</h3>
+                        <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">30 Places
+                            <i class="fa-solid fa-caret-right fa-beat" style="color: #f7f3f3;"></i>
+                        </div>
+                    </article>
+
+
+                    <article
+                        class="relative isolate flex flex-col justify-center overflow-hidden rounded-2xl  max-w-sm  w-[20%] h-[26rem]  hover:animate-flip px-4 pt-52">
+                        <img src="images/ccard6.png"
+                            class="absolute inset-0 h-full w-full object-cover  hover:animate-flip">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                        <h3 class="z-10 mt-3 text-xl font-semibold text-white overflow-hidden">Best Luxury Dining Place
+                        </h3>
+                        <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">24 Places
+                            <i class="fa-solid fa-caret-right fa-beat" style="color: #f7f3f3;"></i>
+                        </div>
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- Repeat for other categories -->
+            <div class="popular w-[100%] mb-[10rem] mt-[6rem]">
+                <div class="popular_content mb-[4rem] flex items-center justify-start px-[8rem]">
+                    <p class="popular_text m-0 text-[rgb(54,54,54)] text-[2.5rem] leading-[1.2] font-normal ">Popular
+                        localities in and around </p>
+                    <span class="font-medium text-[2.5rem] px-2">Bengaluru</span>
+                </div>
+                <div class="popular_content_details ">
+                    <div class="w-[100%] relative flex flex-wrap px-28">
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Indiranagar</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">608 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Marathahalli</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">1044 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Whitefield</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">1075 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Kormangala 5th Block</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">316 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        JP Nagar</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">716 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        HSR</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">999 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Sarjapur Road</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">813 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-3 py-4 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-between items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col">
+                                    <h5 class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2">
+                                        Jayanagar</h5>
+                                    <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">647 Places</p>
+
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[2rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div
+                            class="relative w-full flex-grow-0 flex-shrink-0 max-w-[33.3333%] px-2.5 pb-3 pr-0 hover:animate-slideinleft">
+                            <div
+                                class="panel_1 p-4 py-7 rounded-lg bg-white border border-[#e8e8e8] mb-2 flex justify-center items-center cursor-pointer shadow-md ">
+                                <div class="panel_detail flex flex-col ">
+                                    <h5
+                                        class="h5 text-[2rem] leading-[1.2] font-normal text-[rgb(28,28,28)] m-0 mb-2 text-center">
+                                        see more</h5>
+                                    <!-- <p class="h5_p text-inherit leading-[1.5] m-0 text-[rgb(54,54,54)]">608 Places</p>
+                                         -->
+                                </div>
+                                <div class="  ">
+                                    <i class="ml-[1rem] flex-shrink-0 flex items-center cursor-inherit ">
+                                        <i class="fa-solid fa-chevron-right fa-fade align-middle leading-1 w-[15px] h-[15px] "
+                                            style="color: #e64814;"></i>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+
+
+    </section>
+
+
+    <div class="relative flex justify-center w-full  bg-[#FFFBF7]  ">
+        <!-- Zomato App Section -->
+
+        <div class="flex justify-between items-center  mt-2">
+            <div class="">
+                <div class="w-[18rem] h-[20rem] ">
+                    <img src="https://b.zmtcdn.com/data/o2_assets/ce5bc038a8a2d4f8f24465c8826182af1726501431.png"
+                        alt="get-zomato-app" class="w-full h-full object-cover mt-[4rem]" />
+                </div>
+            </div>
+        </div>
+
+        <!-- App Text and Form Section -->
+        <div class="mt-[5rem] ">
+            <h2 class="text-3xl font-bold mb-2">Get the Zomato app</h2>
+            <p class="text-base text-gray-700 mb-4">We will send you a link, open it on your phone to download the app
+            </p>
+
+            <!-- Radio Button Selection -->
+            <div class="mb-4 flex">
+                <div class="flex items-center mb-2 gap-9">
+                    <label class="flex items-center  cursor-pointer">
+                        <input type="radio" name="radio" value="email" checked class="hidden">
+                        <!-- <svg viewBox="0 0 20 20" class="w-5 h-5 mr-2">
+                      <circle cx="10" cy="10" r="8" class="text-gray-500" />
+                      <circle cx="10" cy="10" r="5" class="text-gray-900" />
+                    </svg> -->
+                        <i class="fa-regular fa-circle-dot fa-fade w-5 h-3.5 mr-2 align-middle"
+                            style="color: #e63333;"></i>
+                        <span>Email</span>
+                    </label>
+
+                    <div class="flex items-center">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="radio" value="phone" class="hidden">
+                            <!-- <svg viewBox="0 0 20 20" class="w-5 h-5 mr-2">
+                        <circle cx="10" cy="10" r="8" class="text-gray-500" />
+                      </svg> -->
+                            <i class="fa-regular fa-circle fa-fade w-5 h-3.5 mr-2" style="color: #050505;"></i>
+                            <span>Phone</span>
+                        </label>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- Email Input Section -->
+
+            <div class="flex items-center justify-between align-middle">
+
+                <div class="gap-3">
+                    <!-- <label class="block text-sm font-medium mb-2">Email</label> -->
+                    <input type="text" class="w-full p-2 px-[4rem] border border-gray-300 rounded-lg"
+                        placeholder="Enter your email" />
+                </div>
+
+                <!-- Buttons -->
+                <div class="">
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:animate-fadeinbounceright ">Share
+                        App Link</button>
+
+                </div>
+
+            </div>
+
+
+            <!-- App Store Links -->
+            <p class="text-base mt-4 mb-5 text-gray-500">Download app from</p>
+            <div class="flex space-x-8 ">
+                <a href="https://zomato.onelink.me/xqzv/CTA" target="_blank" aria-label="app store link">
+                    <img src="https://b.zmtcdn.com/data/webuikit/23e930757c3df49840c482a8638bf5c31556001144.png"
+                        alt="App Store" class="h-10 w-auto" />
+                </a>
+                <a href="https://zomato.onelink.me/xqzv/CTA" target="_blank" aria-label="play store link">
+                    <img src="https://b.zmtcdn.com/data/webuikit/9f0c85a5e33adb783fa0aef667075f9e1556003622.png"
+                        alt="Play Store" class="h-10 w-auto" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-primary  px-32">
+        <div class="relative max-w-[110rem] max-h-initial mx-auto pt-20 pb-20">
+            <p class="explore_text m-0 mb-8 text-[rgb(54,54,54)] text-[3rem] leading-[4rem] font-medium ">
+                Explore options near me
+            </p>
+
+
+            <div class="mb-4 w-full ">
+
+                <div class=" collapse  collapse-arrow mb-6 shadow-md rounded-lg bg-primary">
+                    <input type="checkbox" class="peer" />
+                    <div
+                        class="collapse-title bg-primary text-gray-500 font-semibold text-xl peer-checked:bg-primary peer-checked:text-gray-300">
+                        Popular Cuisines Near Me
+                    </div>
+                    <div
+                        class="collapse-content bg-primary text-gray-500 peer-checked:bg-primary peer-checked:text-secondary-content">
+
+
+                        <div class="text-xl"><a href="https://www.zomato.com/bakery-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ no-underline text-[#828282] text-base leading-[1.8] mr-4">Bakery
+                                near me</a>
+                            <span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span>
+                            <a href="https://www.zomato.com/beverages-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ no-underline text-[#828282] text-base leading-[1.8] mr-4">Beverages
+                                near me</a>
+                            <span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/biryani-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Biryani
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/burger-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4 ">Burger
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/chinese-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Chinese
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/desserts-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Desserts
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/ice-cream-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Ice
+                                Cream near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/juices-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Juices
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/kebab-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Kebab
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/mughlai-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Mughlai
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/north-indian-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">North
+                                Indian near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/pizza-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Pizza
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/rolls-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Rolls
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/sandwich-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Sandwich
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/seafood-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ  no-underline text-[#828282] text-base leading-[1.8] mr-4">Seafood
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Shake
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/sichuan-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Sichuan
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/south-indian-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ    no-underline text-[#828282] text-base leading-[1.8] mr-4">South
+                                Indian near me</a><span
+                                class="sc-hkbPbT liUrKI   inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/street-food-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ    no-underline text-[#828282] text-base leading-[1.8] mr-4">Street
+                                near me</a><span
+                                class="sc-hkbPbT liUrKI  inline-block w-[0.3rem] h-[0.3rem] bg-[#828282] rounded-full mr-4 mb-[0.35rem]"></span><a
+                                href="https://www.zomato.com/tea-restaurants-near-me"
+                                class="sc-hcnlBt lbHjiZ   no-underline text-[#828282] text-base leading-[1.8] mr-4">Tea
+                                near
+                                me</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-base-200 collapse collapse-arrow mb-6 shadow-md">
+                    <input type="checkbox" class="peer" />
+                    <div
+                        class="collapse-title bg-primary text-gray-500 font-semibold text-xl peer-checked:bg-primary peer-checked:text-gray-300">
+                        Popular restaurant Types Near me
+                    </div>
+                    <div
+                        class="collapse-content bg-primary text-gray-500 peer-checked:bg-primary peer-checked:text-secondary-content">
+
+
+                        <div class="text-xl   ">
+
+                            <a href="https://www.zomato.com/bakeries-near-me" class="sc-lhLRcH grey">Bakeries near
+                                me</a><span class="sc-jMtzgO grey2 "></span><a
+                                href="https://www.zomato.com/bars-near-me" class="sc-lhLRcH grey  ">Bars near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/beverage-shops-near-me" class="sc-lhLRcH grey ">Beverage
+                                Shops near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/bhojanalya-near-me" class="sc-lhLRcH grey">Bhojanalya
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/cafes-near-me" class="sc-lhLRcH grey">Cafés near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/casual-dining-near-me" class="sc-lhLRcH grey">Casual
+                                Dining near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/clubs-near-me" class="sc-lhLRcH grey">Clubs near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/cocktail-bars-near-me" class="sc-lhLRcH grey">Cocktail
+                                Bars near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/confectioneries-near-me"
+                                class="sc-lhLRcH grey">Confectioneries near me</a><span
+                                class="sc-jMtzgO grey2"></span><a href="https://www.zomato.com/dessert-parlor-near-me"
+                                class="sc-lhLRcH grey">Dessert Parlors near me</a><span
+                                class="sc-jMtzgO grey2"></span><a href="https://www.zomato.com/dhabas-near-me"
+                                class="sc-lhLRcH grey">Dhabas near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/fine-dining-near-me" class="sc-lhLRcH grey">Fine Dining
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/food-courts-near-me" class="sc-lhLRcH grey">Food Courts
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/food-trucks-near-me" class="sc-lhLRcH grey">Food Trucks
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/irani-cafes-near-me" class="sc-lhLRcH grey">Irani Cafes
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/kiosks-near-me" class="sc-lhLRcH grey">Kiosks near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/lounges-near-me" class="sc-lhLRcH grey">Lounges near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/microbreweries-near-me"
+                                class="sc-lhLRcH grey">Microbreweries near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/paan-shop-near-me" class="sc-lhLRcH grey">Paan Shop near
+                                me</a><span class="sc-jMtzgO grey2"></span><a href="https://www.zomato.com/pubs-near-me"
+                                class="sc-lhLRcH grey">Pubs near
+                                me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/quick-bites-near-me" class="sc-lhLRcH grey">Quick Bites
+                                near me</a><span class="sc-jMtzgO grey2"></span><a
+                                href="https://www.zomato.com/sweet-shops-near-me" class="sc-lhLRcH grey">Sweet Shops
+                                near me</a>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="bg-base-200 collapse collapse-arrow mb-6 shadow-md">
+                    <input type="checkbox" class="peer" />
+                    <div
+                        class="collapse-title bg-primary text-gray-500 font-semibold text-xl peer-checked:bg-primary peer-checked:text-gray-300">
+                        Top restaurant Chains
+                    </div>
+                    <div
+                        class="collapse-content bg-primary text-gray-500 peer-checked:bg-primary peer-checked:text-secondary-content">
+
+                        <div class="text-xl flex flex-wrap items-center justify-evenly">
+                            <a href="https://www.zomato.com/bangalore/restaurants/biryani-blues"
+                                class="sc-ccbnFN grey">Biryani Blues</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/burger-king"
+                                class="sc-ccbnFN grey">Burger King</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/dominos"
+                                class="sc-ccbnFN grey">Domino's</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/kfc" class="sc-ccbnFN grey">KFC</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/krispy-kreme"
+                                class="sc-ccbnFN grey">Krispy Kreme</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/mcdonalds"
+                                class="sc-ccbnFN grey">McDonald's</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/pizza-hut"
+                                class="sc-ccbnFN grey">Pizza Hut</a><a
+                                href="https://www.zomato.com/bangalore/restaurants/wow-momo" class="sc-ccbnFN grey">WOW!
+                                Momo</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-base-200 collapse mb-6 shadow-md mt-2 collapse-arrow">
+                    <input type="checkbox" class="peer" />
+                    <div
+                        class="collapse-title  bg-primary font-semibold text-xl text-gray-500 peer-checked:bg-primary peer-checked:text-gray-300">
+                        Cities We Deliver To
+                    </div>
+
+                    <div
+                        class="collapse-content  bg-primary text-gray-500 peer-checked:bg-primary peer-checked:text-secondary-content">
+
+                        <div class="sc-fNHLbd gXzXf text-xl flex flex-wrap items-center justify-center">
+                            <a href="https://www.zomato.com/ncr/delivery" class="sc-ccbnFN grey grey">Delhi</a><a
+                                href="https://www.zomato.com/kolkata/delivery" class="sc-ccbnFN grey ">Kolkata</a><a
+                                href="https://www.zomato.com/mumbai/delivery" class="sc-ccbnFN grey">Mumbai</a><a
+                                href="https://www.zomato.com/bangalore/delivery" class="sc-ccbnFN grey">Bengaluru</a><a
+                                href="https://www.zomato.com/pune/delivery" class="sc-ccbnFN grey">Pune</a><a
+                                href="https://www.zomato.com/hyderabad/delivery" class="sc-ccbnFN grey">Hyderabad</a><a
+                                href="https://www.zomato.com/chennai/delivery" class="sc-ccbnFN grey">Chennai</a><a
+                                href="https://www.zomato.com/lucknow/delivery" class="sc-ccbnFN grey">Lucknow</a><a
+                                href="https://www.zomato.com/kochi/delivery" class="sc-ccbnFN grey">Kochi</a><a
+                                href="https://www.zomato.com/jaipur/delivery" class="sc-ccbnFN grey">Jaipur</a><a
+                                href="https://www.zomato.com/ahmedabad/delivery" class="sc-ccbnFN grey">Ahmedabad</a><a
+                                href="https://www.zomato.com/chandigarh/delivery"
+                                class="sc-ccbnFN grey">Chandigarh</a><a href="https://www.zomato.com/goa/delivery"
+                                class="sc-ccbnFN grey">Goa</a><a href="https://www.zomato.com/indore/delivery"
+                                class="sc-ccbnFN grey">Indore</a><a href="https://www.zomato.com/gangtok/delivery"
+                                class="sc-ccbnFN grey">Gangtok</a><a href="https://www.zomato.com/nashik/delivery"
+                                class="sc-ccbnFN grey">Nashik</a><a href="https://www.zomato.com/ooty/delivery"
+                                class="sc-ccbnFN grey">Ooty</a><a href="https://www.zomato.com/shimla/delivery"
+                                class="sc-ccbnFN grey">Shimla</a><a href="https://www.zomato.com/ludhiana/delivery"
+                                class="sc-ccbnFN grey">Ludhiana</a><a href="https://www.zomato.com/guwahati/delivery"
+                                class="sc-ccbnFN grey">Guwahati</a><a href="https://www.zomato.com/amritsar/delivery"
+                                class="sc-ccbnFN grey">Amritsar</a><a href="https://www.zomato.com/kanpur/delivery"
+                                class="sc-ccbnFN grey">Kanpur</a><a href="https://www.zomato.com/allahabad/delivery"
+                                class="sc-ccbnFN grey">Allahabad</a><a href="https://www.zomato.com/aurangabad/delivery"
+                                class="sc-ccbnFN grey">Aurangabad</a><a href="https://www.zomato.com/bhopal/delivery"
+                                class="sc-ccbnFN grey">Bhopal</a><a href="https://www.zomato.com/ranchi/delivery"
+                                class="sc-ccbnFN grey">Ranchi</a><a href="https://www.zomato.com/visakhapatnam/delivery"
+                                class="sc-ccbnFN grey">Visakhapatnam</a><a
+                                href="https://www.zomato.com/bhubaneswar/delivery"
+                                class="sc-ccbnFN grey">Bhubaneswar</a><a
+                                href="https://www.zomato.com/coimbatore/delivery"
+                                class="sc-ccbnFN grey">Coimbatore</a><a href="https://www.zomato.com/mangalore/delivery"
+                                class="sc-ccbnFN grey">Mangalore</a><a href="https://www.zomato.com/vadodara/delivery"
+                                class="sc-ccbnFN grey">Vadodara</a><a href="https://www.zomato.com/nagpur/delivery"
+                                class="sc-ccbnFN grey">Nagpur</a><a href="https://www.zomato.com/agra/delivery"
+                                class="sc-ccbnFN grey">Agra</a><a href="https://www.zomato.com/dehradun/delivery"
+                                class="sc-ccbnFN grey">Dehradun</a><a href="https://www.zomato.com/mysore/delivery"
+                                class="sc-ccbnFN grey">Mysore</a><a href="https://www.zomato.com/puducherry/delivery"
+                                class="sc-ccbnFN grey">Puducherry</a><a href="https://www.zomato.com/surat/delivery"
+                                class="sc-ccbnFN grey">Surat</a><a href="https://www.zomato.com/varanasi/delivery"
+                                class="sc-ccbnFN grey">Varanasi</a><a href="https://www.zomato.com/patna/delivery"
+                                class="sc-ccbnFN grey">Patna</a><a href="https://www.zomato.com/udaipur/delivery"
+                                class="sc-ccbnFN grey">Udaipur</a><a href="https://www.zomato.com/srinagar/delivery"
+                                class="sc-ccbnFN grey">Srinagar</a><a href="https://www.zomato.com/khajuraho/delivery"
+                                class="sc-ccbnFN grey">Khajuraho</a><a href="https://www.zomato.com/neemrana/delivery"
+                                class="sc-ccbnFN grey">Neemrana</a><a href="https://www.zomato.com/cuttack/delivery"
+                                class="sc-ccbnFN grey">Cuttack</a><a href="https://www.zomato.com/trivandrum/delivery"
+                                class="sc-ccbnFN grey">Trivandrum</a><a href="https://www.zomato.com/haridwar/delivery"
+                                class="sc-ccbnFN grey">Haridwar</a><a href="https://www.zomato.com/leh/delivery"
+                                class="sc-ccbnFN grey">Leh</a><a href="https://www.zomato.com/pushkar/delivery"
+                                class="sc-ccbnFN grey">Pushkar</a><a href="https://www.zomato.com/rajkot/delivery"
+                                class="sc-ccbnFN grey">Rajkot</a><a href="https://www.zomato.com/madurai/delivery"
+                                class="sc-ccbnFN grey">Madurai</a><a href="https://www.zomato.com/kozhikode/delivery"
+                                class="sc-ccbnFN grey">Kozhikode</a><a href="https://www.zomato.com/alappuzha/delivery"
+                                class="sc-ccbnFN grey">Alappuzha</a><a href="https://www.zomato.com/thrissur/delivery"
+                                class="sc-ccbnFN grey">Thrissur</a><a href="https://www.zomato.com/manipal/delivery"
+                                class="sc-ccbnFN grey">Manipal</a><a href="https://www.zomato.com/vijayawada/delivery"
+                                class="sc-ccbnFN grey">Vijayawada</a><a href="https://www.zomato.com/jodhpur/delivery"
+                                class="sc-ccbnFN grey">Jodhpur</a><a href="https://www.zomato.com/kota/delivery"
+                                class="sc-ccbnFN grey">Kota</a><a href="https://www.zomato.com/ajmer/delivery"
+                                class="sc-ccbnFN grey">Ajmer</a><a href="https://www.zomato.com/mussoorie/delivery"
+                                class="sc-ccbnFN grey">Mussoorie</a><a href="https://www.zomato.com/rishikesh/delivery"
+                                class="sc-ccbnFN grey">Rishikesh</a><a href="https://www.zomato.com/jalandhar/delivery"
+                                class="sc-ccbnFN grey">Jalandhar</a><a href="https://www.zomato.com/jammu/delivery"
+                                class="sc-ccbnFN grey">Jammu</a><a href="https://www.zomato.com/manali/delivery"
+                                class="sc-ccbnFN grey">Manali</a>
+                            <div class="sc-hSmEHG geEiz"><a href="https://www.zomato.com/delivery-cities"
+                                    class="sc-ePDpFu eYjrkp">All delivery cities</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+        <!-- <div class="cont_1 mb-[2rem]">
+                <div class="rounded-b-lg border-b border-[rgb(232,232,232)]"></div>
+                <div class="mt-0 ml-0 cursor-pointer flex justify-between items-center py-8 px-10">
+                    <section class="text-gray-600 hidden pt-4 px-10 max-h-0 pointer-events-auto opacity-0 transition-opacity duration-250 ease-linear transition-max-height">
+                        <h5 class="font-normal text-[rgb(28,28,28)] text-[20px] leading-[26px] m-0">Popular Cuisines Near Me</h5>
+                    </section>
+                    <i class="transform rotate-0 transition-transform duration-250 ease-in mt-0 ml-0 whitespace-nowrap">
+                        <i class="fa-solid fa-chevron-down fa-beat inline-block align-middle leading-none w-5 h-5" style="color: #ee2b2b;"></i>
+                    </i>
+                </div>
+            </div> -->
+
+
+
+
+
+    </div>
+
+
+    <!-- <footer class="sc-elhb8j-21 fgKeBV">
+        <div class="sc-elhb8j-22 bGfHbP">
+            <section class="sc-elhb8j-2 gzcbGg "><img
+                    src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&amp;crop=198:42;*,*"
+                    alt="Zomato logo" class="sc-elhb8j-1 ixsoFB h-[2.8rem] w-[13.2rem]">
+                <div class="sc-elhb8j-12 cvsUXu mt-[1.2rem]"></div>
+                <section class="sc-elhb8j-10 jPUyxY flex">
+                    <div class="sc-18n4g8v-0 gAhmYY sc-10ugfab-1 gJYvaX max-w-[100%]">
+                        <div tabindex="0" aria-labelledby="country-dropdown-label" class="sc-10ugfab-9 ceanFw  min-w-[10rem] w-max max-w-full cursor-pointer relative py-1 px-2.5 border border-[#b5b5b5] rounded-[0.6rem] "><label
+                                class="sc-10ugfab-2 jzrEzn object-none">Select Country</label><span
+                                class="sc-10ugfab-5 erXsJY           hidden absolute top-[-1.7rem] left-[3.1rem] w-[2.1rem] h-[2.3rem] rotate-45 rounded-[2.2rem] rounded-bl-[0.4rem] bg-white z-11  "></span>
+                            <div tabindex="-1" aria-activedescendant="country-active_cm1nld9ty0015356y2dc6h559"
+                                class="sc-10ugfab-6 hQozga">
+                                <div class="sc-bke1zw-0 fIuLDK sc-10ugfab-0 iYiNyG">
+                                    <div class="sc-bke1zw-1 kvUFhz">
+                                        <div id="country-active_cm1nld9ty0015356y2dc6h559" class="sc-10ugfab-4 fYFzFe">
+                                            <span width="45" class="sc-13tn0rn-0 DHMyd"></span><span
+                                                class="sc-10ugfab-3 dirNi">India</span></div>
+                                    </div>
+                                    <div class="sc-bke1zw-1 jfiZBb">
+                                        <div id="country-uae_cm1nld9ty0015356y2dc6h559" class="sc-10ugfab-4 hVtcrz">
+                                            <span width="45" class="sc-13tn0rn-0 ehBfFg"></span><span
+                                                class="sc-10ugfab-3 dirNi">UAE</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-10ugfab-7 epQgJy"><span width="45" class="sc-13tn0rn-0 mtUrN"></span><span
+                                    class="sc-10ugfab-8 fyCgPB">India</span><i class="sc-rbbb40-1 iFnyeo" size="15"
+                                    color="#1C1C1C"><svg xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="15"
+                                        height="15" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-"
+                                        role="img" class="sc-rbbb40-0 jKmKoK">
+                                        <title>chevron-down</title>
+                                        <path
+                                            d="M4.48 7.38c0.28-0.28 0.76-0.28 1.060 0l4.46 4.48 4.48-4.48c0.28-0.28 0.76-0.28 1.060 0s0.28 0.78 0 1.060l-5 5c-0.3 0.3-0.78 0.3-1.060 0l-5-5c-0.3-0.28-0.3-0.76 0-1.060z">
+                                        </path>
+                                    </svg></i></div>
+                        </div>
+                    </div>
+                    <div class="sc-elhb8j-12 cDEyWL"></div>
+                    <div class="sc-18n4g8v-0 gAhmYY">
+                        <div tabindex="0" aria-labelledby="language-dropdown-label" class="sc-zqptxt-7 iFttwN"><label
+                                id="language-dropdown-label" class="sc-zqptxt-1 jNqlkW">Select Language</label>
+                            <div tabindex="-1" aria-activedescendant="lang-active_cm1nld95g4gs41dtngek32e42"
+                                class="sc-zqptxt-4 bvogHW"><span class="sc-zqptxt-3 iWeJHV"></span>
+                                <section class="sc-zqptxt-2 kVcJCg"></section>
+                            </div>
+                            <div class="sc-zqptxt-5 dOFWhj"><i class="sc-rbbb40-1 iFnyeo" size="18" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="18" height="18"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 iwHbVQ">
+                                        <title>language-globe</title>
+                                        <path
+                                            d="M10 0c-5.523 0-10 4.477-10 10s4.477 10 10 10c5.523 0 10-4.477 10-10v0c-0.011-5.518-4.482-9.989-9.999-10h-0.001zM17.14 6.18h-3c-0.264-1.393-0.63-2.62-1.107-3.791l0.047 0.131c1.755 0.733 3.161 2.010 4.039 3.618l0.021 0.042zM18.1 10c-0.002 0.676-0.090 1.33-0.252 1.954l0.012-0.054h-3.44c0.059-0.57 0.092-1.231 0.092-1.9s-0.034-1.33-0.099-1.982l0.007 0.082h3.44c0.15 0.57 0.238 1.224 0.24 1.899v0.001zM1.9 10c0.002-0.676 0.090-1.33 0.252-1.954l-0.012 0.054h3.46c-0.059 0.57-0.092 1.231-0.092 1.9s0.034 1.33 0.099 1.982l-0.007-0.082h-3.46c-0.15-0.57-0.238-1.224-0.24-1.899v-0.001zM7.48 8.1h5.040c0.063 0.57 0.099 1.231 0.099 1.9s-0.036 1.33-0.107 1.981l0.007-0.081h-5.040c-0.063-0.57-0.099-1.231-0.099-1.9s0.036-1.33 0.107-1.981l-0.007 0.081zM10.76 1.9c0.603 1.228 1.106 2.657 1.436 4.152l0.024 0.128h-4.44c0.354-1.623 0.857-3.052 1.51-4.395l-0.050 0.115c0.24 0 0.5 0 0.76 0s0.48 0 0.76 0zM6.96 2.48c-0.445 1.051-0.825 2.291-1.079 3.576l-0.021 0.124h-3c0.899-1.65 2.305-2.927 4.007-3.64l0.053-0.020zM2.86 13.8h3c0.262 1.4 0.629 2.634 1.107 3.811l-0.047-0.131c-1.757-0.738-3.165-2.022-4.039-3.637l-0.021-0.043zM9.24 18.1c-0.605-1.234-1.108-2.67-1.437-4.172l-0.023-0.128h4.44c-0.352 1.63-0.855 3.066-1.51 4.415l0.050-0.115c-0.24 0-0.5 0-0.76 0s-0.48 0-0.76 0zM13.040 17.52c0.431-1.046 0.798-2.28 1.041-3.558l0.019-0.122h3.040c-0.902 1.642-2.308 2.912-4.006 3.62l-0.054 0.020z">
+                                        </path>
+                                    </svg></i><span class="sc-zqptxt-6 iMPEip">English</span><i
+                                    class="sc-rbbb40-1 iFnyeo" size="15" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="15" height="15"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 jKmKoK">
+                                        <title>chevron-down</title>
+                                        <path
+                                            d="M4.48 7.38c0.28-0.28 0.76-0.28 1.060 0l4.46 4.48 4.48-4.48c0.28-0.28 0.76-0.28 1.060 0s0.28 0.78 0 1.060l-5 5c-0.3 0.3-0.78 0.3-1.060 0l-5-5c-0.3-0.28-0.3-0.76 0-1.060z">
+                                        </path>
+                                    </svg></i></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <div class="sc-bke1zw-0 fIuLDK sc-elhb8j-23 btDUHh">
+                <div name="About Zomato" class="sc-bke1zw-1 sc-elhb8j-20 llOEHd">
+                    <h6 class="sc-elhb8j-18 gQXbfm">About Zomato</h6>
+                    <nav><a href="https://www.zomato.com/who-we-are" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Who We Are</p>
+                        </a><a href="https://blog.zomato.com/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Blog</p>
+                        </a><a href="https://www.zomato.com/careers" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Work With Us</p>
+                        </a><a href="https://www.zomato.com/investor-relations" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Investor Relations</p>
+                        </a><a href="https://www.zomato.com/report-fraud" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Report Fraud</p>
+                        </a><a href="https://blog.zomato.com/press-kit" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Press Kit</p>
+                        </a><a href="https://www.zomato.com/contact" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Contact Us</p>
+                        </a></nav>
+                </div>
+                <div name="Zomaverse" class="sc-bke1zw-1 sc-elhb8j-20 jWound">
+                    <h6 class="sc-elhb8j-18 gQXbfm">Zomaverse</h6>
+                    <nav><a href="https://www.zomato.com/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Zomato</p>
+                        </a><a href="https://www.blinkit.com/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Blinkit</p>
+                        </a><a href="https://www.feedingindia.org/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Feeding India</p>
+                        </a><a href="https://www.hyperpure.com/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Hyperpure</p>
+                        </a><a href="https://www.zomato.com/live" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Zomato Live</p>
+                        </a><a href="https://www.zomato.com/zomaland" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Zomaland</p>
+                        </a><a href="https://www.weatherunion.com/" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Weather Union</p>
+                        </a></nav>
+                </div>
+                <div class="sc-bke1zw-1 sc-elhb8j-20 dLsZWW">
+                    <div class="sc-elhb8j-9 gfYSur">
+                        <h6 class="sc-elhb8j-18 gQXbfm">For Restaurants</h6>
+                        <nav><a href="https://www.zomato.com/partner_with_us" class="sc-elhb8j-17 iFsnCv">
+                                <p class="sc-elhb8j-16 dxcfRo">Partner With Us</p>
+                            </a><a
+                                href="https://play.google.com/store/apps/details?id=com.application.services.partner&amp;hl=en_IN&amp;gl=US"
+                                class="sc-elhb8j-17 iFsnCv">
+                                <p class="sc-elhb8j-16 dxcfRo">Apps For You</p>
+                            </a></nav>
+                    </div>
+                </div>
+                <div name="Learn More" class="sc-bke1zw-1 sc-elhb8j-20 jYhtHx">
+                    <h6 class="sc-elhb8j-18 gQXbfm">Learn More</h6>
+                    <nav><a href="https://www.zomato.com/privacy" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Privacy</p>
+                        </a><a href="https://www.zomato.com/security" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Security</p>
+                        </a><a href="https://www.zomato.com/conditions" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Terms</p>
+                        </a><a href="https://www.zomato.com/directory" class="sc-elhb8j-17 iFsnCv">
+                            <p class="sc-elhb8j-16 dxcfRo">Sitemap</p>
+                        </a></nav>
+                </div>
+                <div name="Social links" class="sc-bke1zw-1 sc-elhb8j-14 HEzmM">
+                    <h6 class="sc-elhb8j-8 fvpjYk">Social links</h6>
+                    <div class="sc-elhb8j-15 RAjVl"><a href="https://in.linkedin.com/company/zomato" target="_blank"
+                            class="sc-elhb8j-17 iDzUMo">
+                            <div class="sc-elhb8j-7 jBOGYb"><i class="sc-rbbb40-1 iFnyeo" size="22" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="22" height="22"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 cvuzKA">
+                                        <path
+                                            d="M0 10C0 4.5 4.5 0 10 0C15.5 0 20 4.5 20 10C20 15.5 15.5 20 10 20C4.5 20 0 15.5 0 10ZM7.0625 8.375H4.75V15.4375H7.0625V8.375ZM7.25 6.1875C7.25 5.5 6.75 5 5.9375 5C5.125 5 4.5625 5.5 4.5625 6.1875C4.5625 6.875 5.0625 7.4375 5.875 7.4375C6.6875 7.4375 7.25 6.875 7.25 6.1875ZM15.5 11.375C15.5 9.1875 14.3125 8.1875 12.8125 8.1875C11.5625 8.1875 11 8.875 10.6875 9.375V8.375H8.375C8.375 9.0625 8.375 15.4375 8.375 15.4375H10.6875V11.5C10.6875 11.3125 10.6875 11.0625 10.75 10.9375C10.9375 10.5 11.3125 10.0625 11.9375 10.0625C12.75 10.0625 13.125 10.6875 13.125 11.6875V15.4375H15.4375C15.5 15.4375 15.5 11.375 15.5 11.375Z">
+                                        </path>
+                                    </svg></i></div>
+                        </a><a href="https://www.instagram.com/zomato/" target="_blank" class="sc-elhb8j-17 iDzUMo">
+                            <div class="sc-elhb8j-7 jBOGYb"><i class="sc-rbbb40-1 iFnyeo" size="22" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="22" height="22"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 cvuzKA">
+                                        <path
+                                            d="M0 10C0 4.5 4.5 0 10 0C15.5 0 20 4.5 20 10C20 15.5 15.5 20 10 20C4.5 20 0 15.5 0 10ZM10.1875 5C8.8125 5 8.625 5 8.0625 5C7.5 5.0625 7.125 5.125 6.8125 5.25C6.5 5.375 6.1875 5.5625 5.875 5.875C5.5625 6.1875 5.375 6.4375 5.25 6.8125C5.125 7.125 5 7.5 5 8.0625C5 8.625 5 8.75 5 10.1875C5 11.625 5 11.8125 5.0625 12.375C5.0625 12.9375 5.1875 13.3125 5.3125 13.625C5.4375 13.9375 5.625 14.25 5.9375 14.5625C6.1875 14.8125 6.5 15 6.875 15.1875C7.1875 15.3125 7.5625 15.4375 8.125 15.4375C8.6875 15.4375 8.875 15.5 10.25 15.5C11.6875 15.5 11.875 15.5 12.4375 15.4375C13 15.375 13.375 15.3125 13.6875 15.1875C14 15.0625 14.3125 14.875 14.625 14.5625C14.9375 14.25 15.125 14 15.25 13.625C15.375 13.3125 15.5 12.875 15.5 12.375C15.5625 11.8125 15.5625 11.625 15.5625 10.1875C15.5625 8.75 15.5625 8.625 15.5 8.0625C15.5 7.5 15.375 7.125 15.25 6.8125C15.125 6.4375 14.9375 6.1875 14.625 5.875C14.375 5.625 14.0625 5.4375 13.6875 5.25C13.375 5.125 12.9375 5.0625 12.4375 5C11.8125 5 11.625 5 10.1875 5ZM9.75 5.9375C9.875 5.9375 10.0625 5.9375 10.1875 5.9375C11.5625 5.9375 11.75 5.9375 12.3125 5.9375C12.8125 5.9375 13.0625 6.0625 13.25 6.125C13.5 6.25 13.6875 6.375 13.875 6.5C14.0625 6.625 14.1875 6.8125 14.25 7.125C14.3125 7.3125 14.4375 7.5625 14.4375 8.0625C14.5 8.625 14.5 8.8125 14.5 10.1875C14.5 11.5625 14.5 11.75 14.4375 12.3125C14.4375 12.8125 14.3125 13.125 14.25 13.3125C14.1875 13.5625 14.0625 13.6875 13.875 13.9375C13.6875 14.125 13.5 14.1875 13.25 14.3125C13.0625 14.375 12.8125 14.5 12.3125 14.5C11.75 14.5 11.5625 14.5625 10.1875 14.5625C8.8125 14.5625 8.625 14.5625 8.0625 14.5C7.5625 14.5 7.3125 14.375 7.125 14.3125C6.875 14.1875 6.6875 14.125 6.5 13.9375C6.3125 13.75 6.1875 13.5625 6.125 13.3125C6.0625 13.125 6 12.875 5.9375 12.3125C5.9375 11.75 5.9375 11.625 5.9375 10.1875C5.9375 8.8125 5.9375 8.625 5.9375 8.0625C6 7.5625 6.0625 7.3125 6.125 7.125C6.25 6.875 6.375 6.6875 6.5 6.5C6.625 6.3125 6.875 6.1875 7.125 6.125C7.3125 6.0625 7.5625 5.9375 8.0625 5.9375C8.5625 5.9375 8.75 5.9375 9.75 5.9375ZM13 6.8125C12.6875 6.8125 12.375 7.0625 12.375 7.4375C12.375 7.8125 12.625 8.0625 13 8.0625C13.375 8.0625 13.625 7.8125 13.625 7.4375C13.625 7.0625 13.3125 6.8125 13 6.8125ZM10.1875 7.5C8.75 7.5 7.5 8.6875 7.5 10.1875C7.5 11.6875 8.6875 12.875 10.1875 12.875C11.6875 12.875 12.875 11.6875 12.875 10.1875C12.875 8.6875 11.6875 7.5 10.1875 7.5ZM10.1875 8.4375C11.125 8.4375 11.9375 9.1875 11.9375 10.1875C11.9375 11.1875 11.1875 11.9375 10.1875 11.9375C9.25 11.9375 8.4375 11.1875 8.4375 10.1875C8.4375 9.1875 9.25 8.4375 10.1875 8.4375Z">
+                                        </path>
+                                    </svg></i></div>
+                        </a><a href="https://twitter.com/zomato" target="_blank" class="sc-elhb8j-17 iDzUMo">
+                            <div class="sc-elhb8j-7 jBOGYb"><i class="sc-rbbb40-1 iFnyeo" size="22" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="22" height="22"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 cvuzKA">
+                                        <title>twitter-circle</title><svg xmlns="http://www.w3.org/2000/svg"
+                                            shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                                            image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z">
+                                            </path>
+                                            <path fill="#fff" fill-rule="nonzero"
+                                                d="M318.64 157.549h33.401l-72.973 83.407 85.85 113.495h-67.222l-52.647-68.836-60.242 68.836h-33.423l78.052-89.212-82.354-107.69h68.924l47.59 62.917 55.044-62.917zm-11.724 176.908h18.51L205.95 176.493h-19.86l120.826 157.964z">
+                                            </path>
+                                        </svg>
+                                    </svg></i></div>
+                        </a><a href="https://www.youtube.com/zomato" target="_blank" class="sc-elhb8j-17 iDzUMo">
+                            <div class="sc-elhb8j-7 jBOGYb"><i class="sc-rbbb40-1 iFnyeo" size="22" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="22" height="22"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 cvuzKA">
+                                        <path
+                                            d="M0 10C0 4.5 4.5 0 10 0C15.5 0 20 4.5 20 10C20 15.5 15.5 20 10 20C4.5 20 0 15.5 0 10ZM15.1875 7.4375C15.0625 7 14.6875 6.625 14.25 6.5C13.4375 6.25 10.1875 6.25 10.1875 6.25C10.1875 6.25 6.9375 6.25 6.125 6.5C5.6875 6.625 5.3125 7 5.1875 7.4375C5 8.25 5 10 5 10C5 10 5 11.75 5.25 12.5625C5.375 13 5.75 13.375 6.1875 13.5C7 13.75 10.25 13.75 10.25 13.75C10.25 13.75 13.5 13.75 14.3125 13.5C14.75 13.375 15.125 13 15.25 12.5625C15.5 11.75 15.5 10 15.5 10C15.5 10 15.4375 8.25 15.1875 7.4375ZM9.25 11.75V8.5L11.875 10.125L9.25 11.75Z">
+                                        </path>
+                                    </svg></i></div>
+                        </a><a href="https://www.facebook.com/zomato" target="_blank" class="sc-elhb8j-17 iDzUMo">
+                            <div class="sc-elhb8j-7 jBOGYb"><i class="sc-rbbb40-1 iFnyeo" size="22" color="#1C1C1C"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="#1C1C1C" width="22" height="22"
+                                        viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                                        class="sc-rbbb40-0 cvuzKA">
+                                        <path
+                                            d="M0 10C0 4.5 4.5 0 10 0C15.5 0 20 4.5 20 10C20 15.5 15.5 20 10 20C4.5 20 0 15.5 0 10ZM10.75 15.4375V10.1875H12.1875L12.375 8.375H10.75V7.5C10.75 7.0625 10.8125 6.8125 11.5 6.8125H12.375V5H10.9375C9.1875 5 8.625 5.875 8.625 7.3125V8.375H7.5V10.1875H8.5625V15.4375C8.5625 15.4375 10.75 15.4375 10.75 15.4375Z">
+                                        </path>
+                                    </svg></i></div>
+                        </a></div>
+                    <div class="sc-elhb8j-12 cvsUXu"></div>
+                    <div class="sc-elhb8j-12 cvsUXu"></div>
+                    <section class="sc-elhb8j-11 eHuOnX"><a href="https://link.zomato.com/xqzv/downloadZomatoIos"
+                            target="_blank" aria-label="app store link" class="sc-16nfz79-0 blTnzu">
+                            <div height="4rem" width="13.7rem" class="sc-s1isp7-1 fxuOHl">
+                                <div src="" alt="image" class="sc-s1isp7-3 cVOEqG"></div><img alt="image"
+                                    src="https://b.zmtcdn.com/data/webuikit/9f0c85a5e33adb783fa0aef667075f9e1556003622.png"
+                                    loading="lazy" class="sc-s1isp7-5 fyZwWD">
+                            </div>
+                        </a>
+                        <div class="sc-elhb8j-12 cvsUXu"></div><a
+                            href="https://link.zomato.com/xqzv/downloadZomatoAndroid" target="_blank"
+                            aria-label="app store link" class="sc-16nfz79-0 blTnzu">
+                            <div height="4rem" width="13.7rem" class="sc-s1isp7-1 fxuOHl">
+                                <div src="" alt="image" class="sc-s1isp7-3 cVOEqG"></div><img alt="image"
+                                    src="https://b.zmtcdn.com/data/webuikit/23e930757c3df49840c482a8638bf5c31556001144.png"
+                                    loading="lazy" class="sc-s1isp7-5 fyZwWD">
+                            </div>
+                        </a>
+                    </section>
+                </div>
+            </div>
+            <hr class="sc-elhb8j-13 bskCAo">
+            <p class="sc-elhb8j-5 kBllqA">By continuing past this page, you agree to our Terms of Service, Cookie
+                Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
+                2008-2024 © Zomato™ Ltd. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+
+    <div class="mt-auto shadow-sm">
+        <section class="w-full flex justify-between h-[10rem] px-32">
+            <div class="flex items-center px-4 hover:animate-zoomOut ">
+                <img src="images/footer.png" alt="">
+            </div>
+            <div class=" flex items-center justify-between  gap-2">
+
+                <div class="ml-[46rem] ">
+                    <div class=" flex justify-between gap-4 ">
+                        <!-- Select -->
+                        <select data-hs-select='{
+                                                "hasSearch": true,
+                                                "searchPlaceholder": "Search...",
+                                                "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-2 px-3",
+                                                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                                                "placeholder": "Select country...",
+                                                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-neutral-200 \" data-title></span></button>",
+                                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
+                                                "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                                                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                                                "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
+                                                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                                                }' class="hidden ">
+                            <option value="">Choose</option>
+                            <option value="AF"
+                                data-hs-select-option='{
+                                             "icon": "<img class=\"inline-block size-8 rounded-full\" src=\"./images/ind.png\" alt=\"Afghanistan\" />"}'>
+                                India
+                            </option>
+                            <option value="AX"
+                                data-hs-select-option='{
+                                           "icon": "<img class=\"inline-block size-8 rounded-full\" src=\"./images/united-arab-emirates-flag-round-circle-icon.svg\" alt=\"Aland Islands\" />"}'>
+                                UAE
+                            </option>
+
+                        </select>
+                        <!-- End Select -->
+
+                        <!-- Select -->
+                        <select data-hs-select='{
+                            "hasSearch": true,
+                            "searchPlaceholder": "Search...",
+                            "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-2 px-3",
+                            "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                            "placeholder": "Select Langua...",
+                            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-neutral-200 \" data-title></span></button>",
+                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-neutral-600",
+                            "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                            "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
+                            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                            }' class="hidden ">
+                            <option value="">Choose</option>
+                            <option value="AF"
+                                data-hs-select-option='{
+                         "icon": "<img class=\"inline-block size-8 border-primary rounded-full text-center\" src=\"./images/es-language-icon.png\" />"}'>
+                                English
+                            </option>
+                            <option value="AX"
+                                data-hs-select-option='{
+                       "icon": "<img class=\"inline-block size-8 rounded-full text-center\" src=\"./images/hi-language-icon.png\" alt=\"Aland Islands\" />"}'>
+                                Hindi
+                            </option>
+
+                            <option value="AX"
+                                data-hs-select-option='{
+                       "icon": "<img class=\"inline-block size-8 rounded-full text-center\" src=\"./images/ja-language-icon.png\" alt=\"Aland Islands\" />"}'>
+                                Japan
+                            </option>
+
+                            <option value="AX"
+                                data-hs-select-option='{
+                       "icon": "<img class=\"inline-block size-8 rounded-full text-center\" src=\"./images/ar-language-icon.png\" alt=\"Aland Islands\" />"}'>
+                                Arabic
+                            </option>
+
+                            <option value="AX"
+                                data-hs-select-option='{
+                       "icon": "<img class=\"inline-block size-8 rounded-full text-center\" src=\"./images/ru-language-icon.png\" alt=\"Aland Islands\" />"}'>
+                                Russian
+                            </option>
+
+                        </select>
+                        <!-- End Select -->
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div>
+
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="mt-auto w-full max-w-[85rem] py-10 px-8 sm:px-6 lg:px-14 mx-auto">
+            <!-- Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
+
+                <div class="col-span-full hidden lg:col-span-1 lg:block mt-3  space-y-2 ">
+                    <h4
+                        class=" font-semibold text-gray-900 uppercase dark:text-neutral-100 mb-2 text-xl hover:animate-zoomin">
+                        about zomato</h4>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">who we are</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">blogs</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">work with us</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">investor relations</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">report fraud</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">press kit</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                            href="#">contact us</a></p>
+                </div>
+                <!-- End Col -->
+
+                <div class="mt-3">
+                    <h4
+                        class="text-xl font-semibold text-gray-900 uppercase dark:text-neutral-100 hover:animate-zoomin">
+                        zomaverse</h4>
+
+                    <div class="mt-3 grid space-y-3 text-sm">
+
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">zomato</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">blinkit</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">feeding india</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">hyperpure</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">zomato live</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">zomaland</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">weather union</a></p>
+
+                    </div>
+                </div>
+                <!-- End Col -->
+
+                <div class="mt-3">
+                    <h4
+                        class="text-xl font-semibold text-gray-900 uppercase dark:text-neutral-100 hover:animate-zoomin ">
+                        for restaurants</h4>
+
+                    <div class="mt-3 grid space-y-3 text-sm">
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">partner with us</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">apps for you</a></p>
+
+                    </div>
+                </div>
+                <!-- End Col -->
+
+                <div class="mt-3">
+                    <h4
+                        class="text-xl font-semibold text-gray-900 uppercase dark:text-neutral-100 hover:animate-zoomin ">
+                        learn more</h4>
+
+                    <div class="mt-3 grid space-y-3 text-sm">
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">privacy</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">security</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">terms</a></p>
+                        <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200 capitalize"
+                                href="#">sitemap</a></p>
+
+                    </div>
+                </div>
+                <!-- End Col -->
+
+                <div class="mt-2">
+                    <h4
+                        class="text-xl font-semibold text-gray-900 uppercase dark:text-neutral-100 px-6 hover:animate-fadein">
+                        social links</h4>
+
+                    <div class="mt-3 space-y-3 text-sm flex items-center w-[12rem] gap-2 justify-center px-4 pr-2">
+
+                        <span
+                            class=" mt-3 inline-flex justify-center items-center size-[30px] rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200 hover:animate-fadeindown hover:scale-150">
+                            <i class="fa-brands fa-instagram  " style="color: #a9146b;"></i>
+                            </svg>
+                        </span>
+
+
+
+
+                        <span
+                            class="inline-flex justify-center items-center size-[30px] rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200 hover:animate-fadeindown hover:scale-150">
+                            <i class="fa-brands fa-square-twitter " style="color: #0745b0;"></i>
+                            </svg>
+                        </span>
+
+
+
+
+                        <span
+                            class="inline-flex justify-center items-center size-[30px] rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200 hover:animate-fadeindown hover:scale-150">
+                            <i class="fa-brands fa-square-facebook " style="color: #0541a8;"></i>
+                            </svg>
+                        </span>
+
+
+
+
+
+                        <span
+                            class="inline-flex justify-center items-center size-[30px] rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200 hover:animate-fadeindown hover:scale-150">
+                            <i class="fa-brands fa-linkedin " style="color: #0f49ae;"></i>
+                            </svg>
+                        </span>
+
+
+
+
+                        <span
+                            class="inline-flex justify-center items-center size-[30px] rounded-full bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-neutral-200 hover:animate-fadeindown hover:scale-150">
+                            <i class="fa-brands fa-square-youtube " style="color: #c90d0d;"></i>
+                            </svg>
+                        </span>
+
+                    </div>
+
+                    <div>
+                        <div class="flex flex-col flex-wrap mt-4 px-8 gap-4">
+                            <a href="https://zomato.onelink.me/xqzv/CTA" target="_blank" aria-label="app store link">
+                                <img src="https://b.zmtcdn.com/data/webuikit/23e930757c3df49840c482a8638bf5c31556001144.png"
+                                    alt="App Store" class="h-10 w-auto" />
+                            </a>
+                            <a href="https://zomato.onelink.me/xqzv/CTA" target="_blank" aria-label="play store link">
+                                <img src="https://b.zmtcdn.com/data/webuikit/9f0c85a5e33adb783fa0aef667075f9e1556003622.png"
+                                    alt="Play Store" class="h-10 w-auto" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- End Col -->
+    </div>
+    <!-- End Grid -->
+
+
+    </footer>
+    <!-- ========== END FOOTER ========== -->
+
+    </div>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 text-center">
+        <p>&copy; 2024 Zomato Clone. All Rights Reserved.</p>
+    </footer>
+
+
+
+    <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    <script src="./node_modules/preline/dist/preline.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAwdvwmBOa4V2x3IUcqtV_m3suaH3gHUm8",
+          authDomain: "zomatoclone1998.firebaseapp.com",
+          projectId: "zomatoclone1998",
+          storageBucket: "zomatoclone1998.firebasestorage.app",
+          messagingSenderId: "114660170787",
+          appId: "1:114660170787:web:8004a19ffa391480d8e596"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>
+</body>
+
+</html>

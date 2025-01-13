@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "okra";
+    src: url('fonts\okra1.otf/');
+}
+
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+}
+
+.container{
+    background-color: lightcoral;
+}
